@@ -31,6 +31,9 @@ jobs:
     - name: Unit Tests
       run: ./gradlew test
     - name: Report JUnit Test Results
-      run: junit "**/build/test-results/**/*.xml"
+      uses: mikepenz/action-junit-report@v3
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: '**/build/test-results/**/*.xml'
     - name: Integration Tests
       run: ./gradlew integTest
